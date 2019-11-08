@@ -2,10 +2,11 @@ let population;
 
 function setup()
 {
-    createCanvas(800, 600);
-    frameRate(15);
-    population = new Population(15, 0.7, 0.01);
+    createCanvas(windowWidth, windowHeight);
+    population = new Population(1000, 0.01, "Ser ou nao ser eis a questao");
 }
+
+let gencount = 0;
 
 function draw()
 {
@@ -18,6 +19,9 @@ function draw()
     {
         textSize(48);
         text(best.toString(), 10, height/2);
+        
+        textSize(32);
+        text("Gen: " + gencount, 10, height/2 + 50);
     }
     
     if(population.isComplete())
@@ -27,7 +31,6 @@ function draw()
 
     population.createMatPool();
     population.nextGen();
-    
-
-
+    population.mutGen();
+    gencount++;
 }

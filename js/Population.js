@@ -1,12 +1,11 @@
 class Population
 {
-    constructor(popSize, fitRate, mutRate)
+    constructor(popSize, mutRate, target)
     {
         this.maxpop = popSize;
         this.population = [];
-        this.fitness = fitRate;
         this.mutation = mutRate;
-        this.target = "exemplo de texto";
+        this.target = target;
         this.matpool = [];
 
         for(let i = 0; i < this.maxpop; i++)
@@ -76,6 +75,14 @@ class Population
             newpop[i] = mixed;
         }
         this.population = newpop;
+    }
+
+    mutGen()
+    {
+        for(let i = 0; i < this.population.length; i++)
+        {
+            this.population[i].mutate(this.mutation);
+        }
     }
 
 }

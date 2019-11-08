@@ -1,3 +1,7 @@
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
+
 class DNA
 {
     constructor(length, startup)
@@ -18,7 +22,7 @@ class DNA
     pickChar(length) 
     {
         var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz0123456789';
-        return characters.charAt(Math.floor(Math.random() * characters.length));
+        return characters.charAt(Math.floor(random(0, characters.length)));
     }
 
     calcFit(target)
@@ -45,6 +49,18 @@ class DNA
                 newdna.genes += other.genes[i];
         }
 
+        console.log(newdna.genes);
         return newdna;
+    }
+
+    mutate(chance)
+    {
+        for(let i = 0; i < this.genes.length; i++)
+        {
+            if(random(1) <= chance)
+            {
+                this.genes.replaceAt(i, this.pickChar(1));
+            }
+        }
     }
 }
